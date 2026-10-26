@@ -15,4 +15,4 @@ Sitio web de portafolio personal para presentar el perfil profesional, habilidad
 
 ## Enlace a GitHub Pages
 
-[Ver proyecto en GitHub Pages](https://github.com/bcisneros-ah)
+[Ver proyecto en GitHub Pages](https://blwhite-8.github.io/web_project_portfolio_es/)

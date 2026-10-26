@@ -230,7 +230,7 @@ img {
 /* — Área imagen — */
 .project-card__top {
   position: relative;
-  height: 330px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
 }
 
@@ -374,13 +374,13 @@ img {
 }
 
 /* ===================================================
-   TABLET  ≤ 768px
+   TABLET  ≤ 1023px
    ───────────────────────────────────────────────────
-   Frame 768×2492px (Figma)
+   Frame 768×2492px (Figma) — se prueba a 768px
    Ellipse 74 (top):    x:428  y:40
-   Ellipse 75 (bottom): x:234  y:2167  →  top:-80px  left:234px
+   Ellipse 75 (bottom): x:234  y:2167
    =================================================== */
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   :root {
     --padding-h: 40px;
   }
@@ -390,6 +390,11 @@ img {
     top: 40px; /* Figma tablet y:40 */
   }
   /* .page__ellipse--bottom: top:0 y centrada — sin cambio */
+
+  /* Separador | del subtítulo se oculta en tablet */
+  .hero__subtitle-sep {
+    display: none;
+  }
 
   /* Hero */
   .hero {
@@ -442,13 +447,13 @@ img {
 }
 
 /* ===================================================
-   MOBILE  ≤ 480px
+   MOBILE  ≤ 767px
    ───────────────────────────────────────────────────
-   Frame 320×2605px (Figma)
+   Frame 320×2605px (Figma) — se prueba a 320px
    Ellipse 74 (top):    x:10   y:10   → centrada (160−150=10)
-   Ellipse 75 (bottom): x:10   y:2296 → top:-80px  centrada
+   Ellipse 75 (bottom): x:10   y:2296 → centrada
    =================================================== */
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   :root {
     --padding-h: 20px;
   }
@@ -460,12 +465,14 @@ img {
   }
   /* .page__ellipse--bottom: top:0, centrada — sin cambio */
 
-  /* Hero — apilado, foto arriba */
+  /* Hero — apilado, foto de borde a borde */
   .hero {
     flex-direction: column;
-    padding-top: 20px;
+    padding-top: 0;
     padding-bottom: 40px;
-    gap: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    gap: 0;
   }
 
   .hero__photo-wrapper {
@@ -474,14 +481,19 @@ img {
   }
 
   .hero__photo {
-    width: 280px;
+    width: 100%;
     height: 280px;
-    margin: 0 auto;
-    display: block;
+  }
+
+  /* El separador | vuelve a ser visible en mobile (el texto wrappea naturalmente) */
+  .hero__subtitle-sep {
+    display: inline;
   }
 
   .hero__content {
-    padding-top: 0;
+    padding-top: 20px;
+    padding-left: var(--padding-h);
+    padding-right: var(--padding-h);
   }
 
   .hero__name {
@@ -536,10 +548,6 @@ img {
   .projects {
     padding-top: 30px;
     padding-bottom: 40px;
-  }
-
-  .project-card__top {
-    height: 160px;
   }
 
   .project-card__badges {
