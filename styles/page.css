@@ -41,6 +41,8 @@ img {
 .page {
   position: relative;
   overflow: hidden;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 /* ===================================================
@@ -118,6 +120,10 @@ img {
   line-height: 1.08;
   color: var(--color-text);
   margin: 0 0 16px;
+}
+
+.hero__name span {
+  display: block;
 }
 
 .hero__subtitle {
