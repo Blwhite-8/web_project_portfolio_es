@@ -1,0 +1,574 @@
+/* ===================================================
+   DESIGN TOKENS
+   =================================================== */
+:root {
+  --color-bg: #111;
+  --color-card: #1c1c1c;
+  --color-accent: #6d6dff;
+  --color-gradient-from: #4c1a97;
+  --color-gradient-to: #6d6dff;
+  --color-text: #fff;
+  --color-text-muted: rgba(255, 255, 255, 0.5);
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
+  --padding-h: 120px;
+}
+
+/* ===================================================
+   BASE
+   =================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "Open Sans", sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ===================================================
+   PAGE WRAPPER
+   =================================================== */
+.page {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===================================================
+   ELIPSES DECORATIVAS
+   ───────────────────────────────────────────────────
+   Figma: círculo #6D6DFF r=150, feGaussianBlur σ=200
+   CSS puro equivalente: background + filter:blur(200px)
+   x — desktop/tablet: calc(75% - 150px) → centro al 75%
+       mobile:          calc(50% - 150px) → centrada
+   y — top:0 en .contact porque padding-top:80px hace que
+       el borde superior de la sección coincida con la
+       elipse en los 3 breakpoints (verificado en Figma)
+   =================================================== */
+.page__ellipse {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  filter: blur(200px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ellipse 74 — dentro de .hero
+   Figma desktop 1440px: x:933  y:240 → centro-x = 1083/1440 ≈ 75% */
+.page__ellipse--top {
+  top: 240px;
+  left: calc(75% - 150px);
+}
+
+/* Ellipse 75 — dentro de .contact
+   Figma: elipse top = sección top (antes del padding) → top:0
+   Centrada horizontalmente en todos los breakpoints */
+.page__ellipse--bottom {
+  top: 0;
+  left: calc(50% - 150px);
+}
+
+/* ===================================================
+   SECTION TITLE (compartido)
+   =================================================== */
+.section-title {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  color: var(--color-text);
+  margin: 0 0 48px;
+  line-height: 1.1;
+}
+
+/* ===================================================
+   HERO
+   =================================================== */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 80px;
+  padding: 40px var(--padding-h) 100px;
+}
+
+.hero__content {
+  flex: 1;
+  min-width: 0;
+  padding-top: 49px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__name {
+  font-family: "Archivo Black", sans-serif;
+  font-weight: 400;
+  font-size: 72px;
+  line-height: 1.08;
+  color: var(--color-text);
+  margin: 0 0 16px;
+}
+
+.hero__subtitle {
+  font-size: 18px;
+  color: var(--color-text-muted);
+  margin: 0 0 12px;
+}
+
+.hero__bio {
+  font-size: 18px;
+  color: var(--color-text);
+  line-height: 1.6;
+  margin: 0 0 48px;
+  max-width: 793px;
+}
+
+.hero__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.hero__nav-link {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+
+.hero__nav-link:hover {
+  color: var(--color-accent);
+}
+
+.hero__nav-bar {
+  display: block;
+  height: 5px;
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    var(--color-gradient-from),
+    var(--color-gradient-to)
+  );
+}
+
+.hero__photo-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.hero__photo {
+  display: block;
+  width: 387px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ===================================================
+   SKILLS
+   =================================================== */
+.skills {
+  padding: 60px var(--padding-h) 60px;
+}
+
+.skills__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.skills__icon {
+  display: block;
+  width: 50px;
+  height: 57px;
+  object-fit: contain;
+}
+
+/* ===================================================
+   PROJECTS
+   =================================================== */
+.projects {
+  padding: 60px var(--padding-h) 80px;
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* — Área imagen — */
+.project-card__top {
+  position: relative;
+  height: 330px;
+  overflow: hidden;
+}
+
+.project-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-card__image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5) 100%);
+  pointer-events: none;
+}
+
+.project-card__badges {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+.project-card__badge {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* — Área cuerpo — */
+.project-card__body {
+  background-color: var(--color-card);
+  padding: 30px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card__title {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--color-text);
+  margin: 0 0 16px;
+}
+
+.project-card__desc {
+  font-size: 18px;
+  color: var(--color-text);
+  line-height: 1.6;
+  margin: 0 0 30px;
+  flex: 1;
+}
+
+.project-card__links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.project-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.project-card__link img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.project-card__link--demo {
+  color: var(--color-accent);
+}
+
+.project-card__link--github {
+  color: var(--color-text-secondary);
+}
+
+.project-card__link:hover {
+  opacity: 0.8;
+}
+
+/* ===================================================
+   CONTACT
+   =================================================== */
+.contact {
+  position: relative;
+  padding: 80px var(--padding-h) 60px;
+  text-align: center;
+}
+
+.contact > *:not(.page__ellipse) {
+  position: relative;
+  z-index: 1;
+}
+
+.contact__email {
+  display: block;
+  color: var(--color-accent);
+  font-size: 18px;
+  text-decoration: none;
+  margin-bottom: 32px;
+}
+
+.contact__email:hover {
+  text-decoration: underline;
+}
+
+.contact__socials {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+
+.contact__social-link {
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.contact__social-link:hover {
+  opacity: 0.7;
+}
+
+.contact__social-link img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+/* ===================================================
+   TABLET  ≤ 768px
+   ───────────────────────────────────────────────────
+   Frame 768×2492px (Figma)
+   Ellipse 74 (top):    x:428  y:40
+   Ellipse 75 (bottom): x:234  y:2167  →  top:-80px  left:234px
+   =================================================== */
+@media (max-width: 768px) {
+  :root {
+    --padding-h: 40px;
+  }
+
+  /* Elipses: solo ajuste vertical; x sigue calc(75% - 150px) */
+  .page__ellipse--top {
+    top: 40px; /* Figma tablet y:40 */
+  }
+  /* .page__ellipse--bottom: top:0 y centrada — sin cambio */
+
+  /* Hero */
+  .hero {
+    gap: 30px;
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+
+  .hero__content {
+    padding-top: 0;
+  }
+
+  .hero__name {
+    font-size: 48px;
+  }
+
+  .hero__photo-wrapper {
+    width: 216px;
+  }
+
+  .hero__photo {
+    width: 216px;
+    height: 280px;
+  }
+
+  /* Skills */
+  .skills {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  /* Projects — columna única */
+  .projects {
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contact: padding-top:80px se mantiene (igual al desktop y al Figma) */
+  .contact {
+    padding-bottom: 40px;
+  }
+
+  .contact__socials {
+    gap: 40px;
+  }
+}
+
+/* ===================================================
+   MOBILE  ≤ 480px
+   ───────────────────────────────────────────────────
+   Frame 320×2605px (Figma)
+   Ellipse 74 (top):    x:10   y:10   → centrada (160−150=10)
+   Ellipse 75 (bottom): x:10   y:2296 → top:-80px  centrada
+   =================================================== */
+@media (max-width: 480px) {
+  :root {
+    --padding-h: 20px;
+  }
+
+  /* Elipses — ambas centradas en mobile */
+  .page__ellipse--top {
+    top: 10px; /* Figma mobile y:10 */
+    left: calc(50% - 150px); /* centrada: 50% de 320 − 150 = 10px */
+  }
+  /* .page__ellipse--bottom: top:0, centrada — sin cambio */
+
+  /* Hero — apilado, foto arriba */
+  .hero {
+    flex-direction: column;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    gap: 20px;
+  }
+
+  .hero__photo-wrapper {
+    order: -1;
+    width: 100%;
+  }
+
+  .hero__photo {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .hero__content {
+    padding-top: 0;
+  }
+
+  .hero__name {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+
+  .hero__subtitle {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+  }
+
+  .hero__bio {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  /* Nav links apilados */
+  .hero__nav {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .hero__nav-link {
+    display: inline-flex;
+  }
+
+  /* Skills — cuadrícula 4 columnas */
+  .skills {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .section-title {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+
+  .skills__list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    justify-items: center;
+  }
+
+  .skills__icon {
+    width: 30px;
+    height: 34px;
+  }
+
+  /* Projects */
+  .projects {
+    padding-top: 30px;
+    padding-bottom: 40px;
+  }
+
+  .project-card__top {
+    height: 160px;
+  }
+
+  .project-card__badges {
+    bottom: 5px;
+    left: 10px;
+    gap: 5px;
+  }
+
+  .project-card__badge {
+    width: 20px;
+    height: 20px;
+  }
+
+  .project-card__body {
+    padding: 20px;
+  }
+
+  .project-card__title {
+    font-size: 20px;
+  }
+
+  .project-card__desc {
+    font-size: 16px;
+  }
+
+  .project-card__link {
+    font-size: 14px;
+  }
+
+  /* Contact: padding-top:80px se mantiene (Figma mobile confirma misma lógica) */
+  .contact {
+    padding-bottom: 30px;
+  }
+
+  .contact__socials {
+    gap: 24px;
+  }
+}
