@@ -374,6 +374,18 @@ img {
 }
 
 /* ===================================================
+   DESKTOP INTERMEDIO  1024px – 1199px
+   ───────────────────────────────────────────────────
+   Reduce padding-h de 120px a 60px para que el nombre
+   no quede solapado por la foto en anchos intermedios.
+   =================================================== */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  :root {
+    --padding-h: 60px;
+  }
+}
+
+/* ===================================================
    TABLET  ≤ 1023px
    ───────────────────────────────────────────────────
    Frame 768×2492px (Figma) — se prueba a 768px
